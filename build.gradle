@@ -36,6 +36,10 @@ dependencies {
 
     // Spring AI
     implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
+    // ETC
+    implementation 'io.netty:netty-resolver-dns-native-macos'
+    implementation 'io.netty:netty-resolver-dns-native-macos:4.1.100.Final:osx-aarch_64'
 }
 
 dependencyManagement {
