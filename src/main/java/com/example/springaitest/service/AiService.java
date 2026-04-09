@@ -10,6 +10,7 @@ import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 @Slf4j
@@ -18,7 +19,7 @@ public class AiService {
     @Autowired
     private ChatModel chatModel;
 
-    public String generateText(String question){
+    public Flux<String> generateText(String question){
 
         // 시스템 메세지 작성
         SystemMessage systemMessage = SystemMessage.builder()
@@ -44,11 +45,16 @@ public class AiService {
                 .build();
 
         // LLM에게 요청하고 응답받기
-        ChatResponse chatResponse = chatModel.call(prompt);
-        AssistantMessage assistantMessage = chatResponse.getResult().getOutput();
-        String answer = assistantMessage.getText();
+        Flux<ChatResponse> fluxResponse = chatModel.stream(prompt);
+        Flux<String> fluxString = fluxResponse.map(
+                chatResponse -> {
+                    AssistantMessage assistantMessage = chatResponse.getResult().getOutput();
+                    String chunk = assistantMessage.getText();
+                    if (chunk == null) chunk = "";
+                    return chunk;
+                });
 
-        return answer;
+        return fluxString;
     }
 
 
