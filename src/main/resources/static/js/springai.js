@@ -57,9 +57,7 @@ springai.printAnswerStreamText = async function(responseBody, targetId, chatPane
 		content += chunk;
 		if (!springai.isOpenTagIncomplete(chunk)) {
 			// 마크다운을 HTML로 변환하고 Bootstrap 스타일 적용----------
-			const htmlContent = marked.parse(content);
-			const styledContent = springai.applyBootstrapStyles(htmlContent);
-			targetElement.innerHTML = styledContent;
+			targetElement.innerHTML = content;
 			//------------------------------------------------------
 		}
 		springai.scrollToHeight(chatPanelId);

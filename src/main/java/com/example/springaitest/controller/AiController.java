@@ -22,7 +22,7 @@ public class AiController {
     @PostMapping(
             value = "/chat",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.TEXT_PLAIN_VALUE
+            produces = MediaType.APPLICATION_NDJSON_VALUE
     )
     public Flux<String> chatModel(@RequestParam("question") String question) {
         Flux<String> answer = aiService.generateText(question);
