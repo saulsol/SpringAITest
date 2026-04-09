@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/ai")
@@ -23,8 +24,8 @@ public class AiController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE
     )
-    public String chatModel(@RequestParam("question") String question) {
-        String answer = aiService.generateText(question);
+    public Flux<String> chatModel(@RequestParam("question") String question) {
+        Flux<String> answer = aiService.generateText(question);
         return answer;
     }
 }
