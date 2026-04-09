@@ -1,4 +1,4 @@
-package com.example.springaitest.controller;
+package com.example.springaitest.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;

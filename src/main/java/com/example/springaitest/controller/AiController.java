@@ -1,6 +1,7 @@
 package com.example.springaitest.controller;
 
 import com.example.springaitest.service.AiService;
+import com.example.springaitest.service.AiServiceByChatClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
