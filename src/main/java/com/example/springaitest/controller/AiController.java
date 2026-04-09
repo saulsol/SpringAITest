@@ -18,6 +18,9 @@ public class AiController {
     @Autowired
     private AiService aiService;
 
+    @Autowired
+    private AiServiceByChatClient aiServiceByChatClient;
+
     // 요청 매핑 메서드
     @PostMapping(
             value = "/chat",
@@ -25,7 +28,7 @@ public class AiController {
             produces = MediaType.APPLICATION_NDJSON_VALUE
     )
     public Flux<String> chatModel(@RequestParam("question") String question) {
-        Flux<String> answer = aiService.generateText(question);
-        return answer;
+//        Flux<String> answer = aiService.generateText(question);
+        return aiServiceByChatClient.generateText(question);
     }
 }
