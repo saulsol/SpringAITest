@@ -73,7 +73,7 @@
     <div id="inputPanel" class="bg-secondary-subtle">
       <div class="input-group p-2">
         <span class="input-group-text">질문</span>
-        <input id="question" type="text" class="form-control" value="">
+        <label for="question"></label><input id="question" type="text" class="form-control" value="" onkeydown="if(event.key === 'Enter') handleSubmit()">
         <span class="input-group-text">
           <button type="button" class="btn btn-primary" onclick="handleSubmit()">제출</button>
         </span>
