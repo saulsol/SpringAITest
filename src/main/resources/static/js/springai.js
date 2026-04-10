@@ -6,16 +6,11 @@ window.springai = window.springai || {};
 // ##### 사용자 질문을 보여줄 엘리먼트를 채팅 패널에 추가하는 함수 #####
 springai.addUserQuestion = function(question, chatPanelId) {
 	const html = `
-    <div class="d-flex justify-content-end m-2">
-      <table>
-        <tr>
-          <td><img src="/image/user.png" width="30"/></td>
-          <td><span>${question}</span></td>
-        </tr>
-      </table>
+    <div class="d-flex justify-content-end align-items-end gap-2 m-2">
+      <div class="chat-bubble user-bubble">${question}</div>
+      <img src="/image/user.png" class="chat-avatar" width="32"/>
     </div>
   `;
-	//document.getElementById(chatPanelId).innerHTML += html;
 	document.getElementById(chatPanelId).insertAdjacentHTML('beforeend', html);
 	springai.scrollToHeight(chatPanelId);
 };
@@ -25,16 +20,11 @@ springai.addAnswerPlaceHolder = function(chatPanelId) {
 	//id-를 붙이는 이유: 숫자로 시작하면 CSS 선택자 문법 에러 날 수 있음
 	let uuid = "id-" + crypto.randomUUID();
 	let html = `
-    <div class="d-flex justify-content-start border-bottom m-2">
-      <table>
-        <tr>
-          <td><img src="/image/assistant.png" width="50"/></td>
-          <td><span id="${uuid}"></span></td>
-        </tr>
-      </table>       
+    <div class="d-flex justify-content-start align-items-end gap-2 m-2">
+      <img src="/image/assistant.png" class="chat-avatar" width="36"/>
+      <div class="chat-bubble ai-bubble"><span id="${uuid}"></span></div>
     </div>
   `;
-	//document.getElementById(chatPanelId).innerHTML += html;
 	document.getElementById(chatPanelId).insertAdjacentHTML('beforeend', html);
 	return uuid;
 };

@@ -18,6 +18,7 @@
         // 텍스트 질문을 얻고 대화 패널에 추가하기
         const question = document.getElementById("question").value;
         if (question === "") return;
+        document.getElementById("question").value = "";
         springai.addUserQuestion(question, "chatPanel");
 
         // 응답이 오기까지 스피너 보여주기
@@ -60,20 +61,16 @@
     </div>
 
     <div id="chatPanel" class="flex-grow-1 container-fluid h-100 my-2" style="overflow-y:auto; overflow-x:hidden;">
-      <div class="d-flex justify-content-start border-bottom m-2">
-        <table>
-          <tr>
-            <td><img src="/image/assistant.png" width="50" /></td>
-            <td><span>질문을 올려주세요.</span></td>
-          </tr>
-        </table>
+      <div class="d-flex justify-content-start align-items-end gap-2 m-2">
+        <img src="/image/assistant.png" class="chat-avatar" width="36" />
+        <div class="chat-bubble ai-bubble">질문을 올려주세요.</div>
       </div>
     </div>
 
     <div id="inputPanel" class="bg-secondary-subtle">
       <div class="input-group p-2">
         <span class="input-group-text">질문</span>
-        <label for="question"></label><input id="question" type="text" class="form-control" value="" onkeydown="if(event.key === 'Enter') handleSubmit()">
+        <label for="question"></label><input id="question" type="text" class="form-control" value="" onkeyup="if(event.key === 'Enter') handleSubmit()">
         <span class="input-group-text">
           <button type="button" class="btn btn-primary" onclick="handleSubmit()">제출</button>
         </span>
