@@ -25,13 +25,14 @@
         springai.setSpinner("spinner", true);
 
 				// AJAX 요청하고 응답받기
-				const response = await fetch('/ai/chat', {
+				const language = document.getElementById("language").value || "영어";
+				const response = await fetch('/ai/prompt-template', {
 				  method: "post",
 					headers: {
 					  'Content-Type': 'application/x-www-form-urlencoded',
 					  'Accept': 'application/x-ndjson'
 					},
-				  body: new URLSearchParams({ question })
+				  body: new URLSearchParams({ statement: question, language })
 				});
 
         // AI 모델 답변이 들어갈 위치를 대화 패널에 추가

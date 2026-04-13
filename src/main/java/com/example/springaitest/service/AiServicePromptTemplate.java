@@ -70,13 +70,12 @@ public class AiServicePromptTemplate {
 
     public Flux<String> promptTemplate4(String statement, String language) {
         String system = """
-                답변을 생성할 때 HTML와 CSS를 사용해서 파란 글자로 출력하세요.
-                <span> 태그 안에 들어갈 내용만 출력하세요.\s
-               \s""";
+                사용자의 질문에 %s로 답변하세요.
+                """.formatted(language);
 
         String userText = """
-                다음 한국어 문장을 %s로 번역해 주세요. \n 문장: %s
-                """.formatted(language, statement);
+                %s
+                """.formatted(statement);
 
         Flux<String> response = chatClient.prompt()
                 .system(system)
