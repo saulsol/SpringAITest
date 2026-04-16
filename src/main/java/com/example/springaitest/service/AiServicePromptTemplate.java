@@ -15,9 +15,9 @@ import java.util.Map;
 @Slf4j
 public class AiServicePromptTemplate {
 
-    private ChatClient chatClient;
+    private final ChatClient chatClient;
 
-    private PromptTemplate systemTemplate = SystemPromptTemplate.builder()
+    private final PromptTemplate systemTemplate = SystemPromptTemplate.builder()
             .template("""
                     답변을 생성할 때 HTML와 CSS를 사용해서 파란 글자로 출력하세요.
                     <span> 태그 안에 들어갈 내용만 출력하세요.
