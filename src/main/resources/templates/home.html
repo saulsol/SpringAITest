@@ -25,21 +25,22 @@
         springai.setSpinner("spinner", true);
 
 				// AJAX 요청하고 응답받기
-				const response = await fetch('/ai/zero-shot-prompt', {
+				const response = await fetch('/ai/list-output-converter', {
 				  method: "post",
 					headers: {
 					  'Content-Type': 'application/x-www-form-urlencoded',
-					  'Accept': 'text/plain'
+					  'Accept': 'application/json'
 					},
-				  body: new URLSearchParams({ review: question })
+				  body: new URLSearchParams({ city: question })
 				});
 
         // AI 모델 답변이 들어갈 위치를 대화 패널에 추가
         const uuid = springai.addAnswerPlaceHolder("chatPanel");
 
-        // 텍스트 답변 출력하기
-        const text = await response.text();
-        document.getElementById(uuid).innerHTML = text;
+        // JSON 배열을 리스트로 변환하여 출력
+        const hotels = await response.json();
+        const listHtml = '<ul>' + hotels.map(h => `<li>${h}</li>`).join('') + '</ul>';
+        document.getElementById(uuid).innerHTML = listHtml;
         springai.scrollToHeight("chatPanel");
       } catch (error) {
         console.log(error);
@@ -71,10 +72,10 @@
 
     <div id="inputPanel" class="bg-secondary-subtle">
       <div class="input-group p-2">
-        <span class="input-group-text">리뷰</span>
-        <label for="question"></label><input id="question" type="text" class="form-control" placeholder="영화 리뷰를 입력하세요" onkeyup="if(event.key === 'Enter') handleSubmit()">
+        <span class="input-group-text">도시</span>
+        <label for="question"></label><input id="question" type="text" class="form-control" placeholder="도시명을 입력하세요 (예: 서울, 도쿄)" onkeyup="if(event.key === 'Enter') handleSubmit()">
         <span class="input-group-text">
-          <button type="button" class="btn btn-primary" onclick="handleSubmit()">분석</button>
+          <button type="button" class="btn btn-primary" onclick="handleSubmit()">검색</button>
         </span>
       </div>
     </div>
