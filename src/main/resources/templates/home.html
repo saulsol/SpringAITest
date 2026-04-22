@@ -25,13 +25,13 @@
         springai.setSpinner("spinner", true);
 
 				// AJAX 요청하고 응답받기
-				const response = await fetch('/ai/multi-messages', {
+				const response = await fetch('/ai/zero-shot-prompt', {
 				  method: "post",
 					headers: {
 					  'Content-Type': 'application/x-www-form-urlencoded',
 					  'Accept': 'text/plain'
 					},
-				  body: new URLSearchParams({ question })
+				  body: new URLSearchParams({ review: question })
 				});
 
         // AI 모델 답변이 들어갈 위치를 대화 패널에 추가
@@ -71,16 +71,10 @@
 
     <div id="inputPanel" class="bg-secondary-subtle">
       <div class="input-group p-2">
-        <span class="input-group-text">언어</span>
-        <select id="language" class="form-select" style="max-width:120px">
-          <option value="영어">영어</option>
-          <option value="일본어">일본어</option>
-          <option value="한국어">한국어</option>
-        </select>
-        <span class="input-group-text">문장</span>
-        <label for="question"></label><input id="question" type="text" class="form-control" value="" onkeyup="if(event.key === 'Enter') handleSubmit()">
+        <span class="input-group-text">리뷰</span>
+        <label for="question"></label><input id="question" type="text" class="form-control" placeholder="영화 리뷰를 입력하세요" onkeyup="if(event.key === 'Enter') handleSubmit()">
         <span class="input-group-text">
-          <button type="button" class="btn btn-primary" onclick="handleSubmit()">제출</button>
+          <button type="button" class="btn btn-primary" onclick="handleSubmit()">분석</button>
         </span>
       </div>
     </div>
